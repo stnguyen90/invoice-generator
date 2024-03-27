@@ -1,0 +1,52 @@
+{
+    "projectId": "<YOUR_PROJECT_ID>",
+    "projectName": "Invoice Generator",
+    "databases": [
+        {
+            "$id": "default",
+            "name": "Default",
+            "$createdAt": "2024-03-27T15:14:53.385+00:00",
+            "$updatedAt": "2024-03-27T15:14:53.385+00:00",
+            "enabled": true
+        }
+    ],
+    "buckets": [
+        {
+            "$id": "logos",
+            "$createdAt": "2024-03-27T15:11:50.261+00:00",
+            "$updatedAt": "2024-03-27T15:13:27.893+00:00",
+            "$permissions": [
+                "create(\"users\")"
+            ],
+            "fileSecurity": true,
+            "name": "Logos",
+            "enabled": true,
+            "maximumFileSize": 1000000,
+            "allowedFileExtensions": [
+                "jpg",
+                "png",
+                "svg",
+                "gif"
+            ],
+            "compression": "zstd",
+            "encryption": false,
+            "antivirus": true
+        },
+        {
+            "$id": "invoices",
+            "$createdAt": "2024-03-27T15:13:05.354+00:00",
+            "$updatedAt": "2024-03-27T15:14:23.942+00:00",
+            "$permissions": [],
+            "fileSecurity": true,
+            "name": "Invoices",
+            "enabled": true,
+            "maximumFileSize": 5000000,
+            "allowedFileExtensions": [
+                "pdf"
+            ],
+            "compression": "zstd",
+            "encryption": true,
+            "antivirus": true
+        }
+    ]
+}
