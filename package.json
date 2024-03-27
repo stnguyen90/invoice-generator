@@ -10,11 +10,14 @@
 		"preview": "vite preview"
 	},
 	"dependencies": {
+		"@tanstack/react-router": "^1.22.9",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.6.3",
+		"@tanstack/router-devtools": "^1.22.9",
+		"@tanstack/router-vite-plugin": "^1.23.0",
 		"@types/react": "^18.2.66",
 		"@types/react-dom": "^18.2.22",
 		"@vitejs/plugin-react": "^4.2.1",
