@@ -74,3 +74,12 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer base {
+  h1, h2, h3, h4 {
+    font-family: 'Poppins';
+  }
+}
+html, body, #root {
+  height: 100%;
+}

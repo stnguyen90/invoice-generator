@@ -16,28 +16,92 @@ import { Route as rootRoute } from './routes/__root'
 
 // Create Virtual Routes
 
+const LayoutLazyImport = createFileRoute('/_layout')()
+const LayoutIndexLazyImport = createFileRoute('/_layout/')()
 const AuthSignInLazyImport = createFileRoute('/auth/sign-in')()
+const LayoutSettingsLazyImport = createFileRoute('/_layout/settings')()
+const LayoutProductsLazyImport = createFileRoute('/_layout/products')()
+const LayoutClientsLazyImport = createFileRoute('/_layout/clients')()
 
 // Create/Update Routes
+
+const LayoutLazyRoute = LayoutLazyImport.update({
+  id: '/_layout',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/_layout.lazy').then((d) => d.Route))
+
+const LayoutIndexLazyRoute = LayoutIndexLazyImport.update({
+  path: '/',
+  getParentRoute: () => LayoutLazyRoute,
+} as any).lazy(() => import('./routes/_layout.index.lazy').then((d) => d.Route))
 
 const AuthSignInLazyRoute = AuthSignInLazyImport.update({
   path: '/auth/sign-in',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/auth/sign-in.lazy').then((d) => d.Route))
 
+const LayoutSettingsLazyRoute = LayoutSettingsLazyImport.update({
+  path: '/settings',
+  getParentRoute: () => LayoutLazyRoute,
+} as any).lazy(() =>
+  import('./routes/_layout.settings.lazy').then((d) => d.Route),
+)
+
+const LayoutProductsLazyRoute = LayoutProductsLazyImport.update({
+  path: '/products',
+  getParentRoute: () => LayoutLazyRoute,
+} as any).lazy(() =>
+  import('./routes/_layout.products.lazy').then((d) => d.Route),
+)
+
+const LayoutClientsLazyRoute = LayoutClientsLazyImport.update({
+  path: '/clients',
+  getParentRoute: () => LayoutLazyRoute,
+} as any).lazy(() =>
+  import('./routes/_layout.clients.lazy').then((d) => d.Route),
+)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/_layout': {
+      preLoaderRoute: typeof LayoutLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/_layout/clients': {
+      preLoaderRoute: typeof LayoutClientsLazyImport
+      parentRoute: typeof LayoutLazyImport
+    }
+    '/_layout/products': {
+      preLoaderRoute: typeof LayoutProductsLazyImport
+      parentRoute: typeof LayoutLazyImport
+    }
+    '/_layout/settings': {
+      preLoaderRoute: typeof LayoutSettingsLazyImport
+      parentRoute: typeof LayoutLazyImport
+    }
     '/auth/sign-in': {
       preLoaderRoute: typeof AuthSignInLazyImport
       parentRoute: typeof rootRoute
+    }
+    '/_layout/': {
+      preLoaderRoute: typeof LayoutIndexLazyImport
+      parentRoute: typeof LayoutLazyImport
     }
   }
 }
 
 // Create and export the route tree
 
-export const routeTree = rootRoute.addChildren([AuthSignInLazyRoute])
+export const routeTree = rootRoute.addChildren([
+  LayoutLazyRoute.addChildren([
+    LayoutClientsLazyRoute,
+    LayoutProductsLazyRoute,
+    LayoutSettingsLazyRoute,
+    LayoutIndexLazyRoute,
+  ]),
+  AuthSignInLazyRoute,
+])
 
 /* prettier-ignore-end */
