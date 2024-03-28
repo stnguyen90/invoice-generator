@@ -36,7 +36,7 @@
                     "type": "string",
                     "status": "available",
                     "error": "",
-                    "required": true,
+                    "required": false,
                     "array": false,
                     "size": 50,
                     "default": null
@@ -313,20 +313,20 @@
                     "type": "string",
                     "status": "available",
                     "error": "",
-                    "required": true,
+                    "required": false,
                     "array": false,
                     "size": 250,
-                    "default": null
+                    "default": ""
                 },
                 {
                     "key": "terms",
                     "type": "string",
                     "status": "available",
                     "error": "",
-                    "required": true,
+                    "required": false,
                     "array": false,
                     "size": 250,
-                    "default": null
+                    "default": ""
                 }
             ],
             "indexes": []
@@ -341,6 +341,16 @@
             "enabled": true,
             "documentSecurity": true,
             "attributes": [
+                {
+                    "key": "userId",
+                    "type": "string",
+                    "status": "available",
+                    "error": "",
+                    "required": true,
+                    "array": false,
+                    "size": 50,
+                    "default": null
+                },
                 {
                     "key": "description",
                     "type": "string",
