@@ -25,3 +25,6 @@ dist-ssr
 
 # Appwrite related files
 appwrite.json
+
+# App related files
+.env
