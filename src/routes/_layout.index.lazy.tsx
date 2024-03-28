@@ -2,7 +2,7 @@ import { type Invoice, columns } from "@/components/invoices/columns";
 import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/ui/data-table";
 import { useQuery } from "@tanstack/react-query";
-import { createLazyFileRoute } from "@tanstack/react-router";
+import { Link, createLazyFileRoute } from "@tanstack/react-router";
 import { Search } from "lucide-react";
 
 async function getData(): Promise<Invoice[]> {
@@ -37,7 +37,9 @@ function Index() {
           <Button variant="outline" size="icon" className="bg-gray-50">
             <Search className="h-4 w-4" />
           </Button>
-          <Button>Create invoice</Button>
+          <Link to="/invoices/new">
+            <Button>Create invoice</Button>
+          </Link>
         </div>
       </div>
       <div className="border rounded-lg">
