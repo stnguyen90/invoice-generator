@@ -4,18 +4,19 @@ import { DataTable } from "@/components/ui/data-table";
 import { useQuery } from "@tanstack/react-query";
 import { createLazyFileRoute } from "@tanstack/react-router";
 import { Search } from "lucide-react";
+import { databases, Query } from "@/appwrite";
 
 async function getData(): Promise<Invoice[]> {
-  return [
-    {
-      id: "728ed52f",
-      subject: "Website Development",
-      client: "ABC Company",
-      status: "paid",
-      amount: 1500,
-      dueDate: new Date("2024-03-28"),
-    },
-  ];
+  const invoices = databases.listDocuments('default', 'invoices');
+  console.log((await invoices).documents);
+  return (await invoices).documents.map((invoice) => ({
+    id: invoice["$id"],
+    subject: invoice["subject"],
+    client: invoice["client"],
+    status: invoice["status"],
+    amount: invoice["total"],
+    dueDate: new Date(invoice["dueDate"]),
+  }));
 }
 
 export const Route = createLazyFileRoute("/_layout/")({
