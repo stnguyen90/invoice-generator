@@ -10,6 +10,384 @@
             "enabled": true
         }
     ],
+    "collections": [
+        {
+            "$id": "users",
+            "$permissions": [
+                "create(\"users\")"
+            ],
+            "databaseId": "default",
+            "name": "Users",
+            "enabled": true,
+            "documentSecurity": true,
+            "attributes": [
+                {
+                    "key": "company",
+                    "type": "string",
+                    "status": "available",
+                    "error": "",
+                    "required": false,
+                    "array": false,
+                    "size": 50,
+                    "default": null
+                },
+                {
+                    "key": "logoFileId",
+                    "type": "string",
+                    "status": "available",
+                    "error": "",
+                    "required": true,
+                    "array": false,
+                    "size": 50,
+                    "default": null
+                },
+                {
+                    "key": "address1",
+                    "type": "string",
+                    "status": "available",
+                    "error": "",
+                    "required": false,
+                    "array": false,
+                    "size": 50,
+                    "default": null
+                },
+                {
+                    "key": "address2",
+                    "type": "string",
+                    "status": "available",
+                    "error": "",
+                    "required": false,
+                    "array": false,
+                    "size": 50,
+                    "default": null
+                },
+                {
+                    "key": "city",
+                    "type": "string",
+                    "status": "available",
+                    "error": "",
+                    "required": false,
+                    "array": false,
+                    "size": 50,
+                    "default": null
+                },
+                {
+                    "key": "state",
+                    "type": "string",
+                    "status": "available",
+                    "error": "",
+                    "required": false,
+                    "array": false,
+                    "size": 25,
+                    "default": null
+                },
+                {
+                    "key": "zip",
+                    "type": "string",
+                    "status": "available",
+                    "error": "",
+                    "required": false,
+                    "array": false,
+                    "size": 10,
+                    "default": null
+                }
+            ],
+            "indexes": []
+        },
+        {
+            "$id": "clients",
+            "$permissions": [
+                "create(\"users\")"
+            ],
+            "databaseId": "default",
+            "name": "Clients",
+            "enabled": true,
+            "documentSecurity": true,
+            "attributes": [
+                {
+                    "key": "userId",
+                    "type": "string",
+                    "status": "available",
+                    "error": "",
+                    "required": true,
+                    "array": false,
+                    "size": 50,
+                    "default": null
+                },
+                {
+                    "key": "name",
+                    "type": "string",
+                    "status": "available",
+                    "error": "",
+                    "required": false,
+                    "array": false,
+                    "size": 50,
+                    "default": null
+                },
+                {
+                    "key": "company",
+                    "type": "string",
+                    "status": "available",
+                    "error": "",
+                    "required": false,
+                    "array": false,
+                    "size": 50,
+                    "default": null
+                },
+                {
+                    "key": "address1",
+                    "type": "string",
+                    "status": "available",
+                    "error": "",
+                    "required": false,
+                    "array": false,
+                    "size": 50,
+                    "default": null
+                },
+                {
+                    "key": "address2",
+                    "type": "string",
+                    "status": "available",
+                    "error": "",
+                    "required": false,
+                    "array": false,
+                    "size": 50,
+                    "default": null
+                },
+                {
+                    "key": "city",
+                    "type": "string",
+                    "status": "available",
+                    "error": "",
+                    "required": false,
+                    "array": false,
+                    "size": 50,
+                    "default": null
+                },
+                {
+                    "key": "state",
+                    "type": "string",
+                    "status": "available",
+                    "error": "",
+                    "required": false,
+                    "array": false,
+                    "size": 25,
+                    "default": null
+                },
+                {
+                    "key": "zip",
+                    "type": "string",
+                    "status": "available",
+                    "error": "",
+                    "required": false,
+                    "array": false,
+                    "size": 10,
+                    "default": null
+                },
+                {
+                    "key": "emails",
+                    "type": "string",
+                    "status": "available",
+                    "error": "",
+                    "required": true,
+                    "array": true,
+                    "format": "email",
+                    "default": null
+                }
+            ],
+            "indexes": []
+        },
+        {
+            "$id": "invoices",
+            "$permissions": [
+                "create(\"users\")"
+            ],
+            "databaseId": "default",
+            "name": "Invoices",
+            "enabled": true,
+            "documentSecurity": true,
+            "attributes": [
+                {
+                    "key": "userId",
+                    "type": "string",
+                    "status": "available",
+                    "error": "",
+                    "required": true,
+                    "array": false,
+                    "size": 50,
+                    "default": null
+                },
+                {
+                    "key": "clientId",
+                    "type": "string",
+                    "status": "available",
+                    "error": "",
+                    "required": true,
+                    "array": false,
+                    "size": 50,
+                    "default": null
+                },
+                {
+                    "key": "client",
+                    "type": "relationship",
+                    "status": "available",
+                    "error": "",
+                    "required": false,
+                    "array": false,
+                    "relatedCollection": "clients",
+                    "relationType": "manyToOne",
+                    "twoWay": false,
+                    "twoWayKey": "invoices",
+                    "onDelete": "cascade",
+                    "side": "parent"
+                },
+                {
+                    "key": "dueDate",
+                    "type": "datetime",
+                    "status": "available",
+                    "error": "",
+                    "required": true,
+                    "array": false,
+                    "format": "",
+                    "default": null
+                },
+                {
+                    "key": "products",
+                    "type": "string",
+                    "status": "available",
+                    "error": "",
+                    "required": false,
+                    "array": false,
+                    "size": 65535,
+                    "default": null
+                },
+                {
+                    "key": "tax",
+                    "type": "double",
+                    "status": "available",
+                    "error": "",
+                    "required": false,
+                    "array": false,
+                    "min": 0,
+                    "max": 1,
+                    "default": 0
+                },
+                {
+                    "key": "total",
+                    "type": "double",
+                    "status": "available",
+                    "error": "",
+                    "required": true,
+                    "array": false,
+                    "min": 0,
+                    "max": null,
+                    "default": null
+                },
+                {
+                    "key": "status",
+                    "type": "string",
+                    "status": "available",
+                    "error": "",
+                    "required": false,
+                    "array": false,
+                    "elements": [
+                        "draft",
+                        "pending",
+                        "paid"
+                    ],
+                    "format": "enum",
+                    "default": "draft"
+                },
+                {
+                    "key": "subject",
+                    "type": "string",
+                    "status": "available",
+                    "error": "",
+                    "required": true,
+                    "array": false,
+                    "size": 250,
+                    "default": null
+                },
+                {
+                    "key": "note",
+                    "type": "string",
+                    "status": "available",
+                    "error": "",
+                    "required": true,
+                    "array": false,
+                    "size": 250,
+                    "default": null
+                },
+                {
+                    "key": "terms",
+                    "type": "string",
+                    "status": "available",
+                    "error": "",
+                    "required": true,
+                    "array": false,
+                    "size": 250,
+                    "default": null
+                }
+            ],
+            "indexes": []
+        },
+        {
+            "$id": "saved-products",
+            "$permissions": [
+                "create(\"users\")"
+            ],
+            "databaseId": "default",
+            "name": "Saved Products",
+            "enabled": true,
+            "documentSecurity": true,
+            "attributes": [
+                {
+                    "key": "description",
+                    "type": "string",
+                    "status": "available",
+                    "error": "",
+                    "required": true,
+                    "array": false,
+                    "size": 250,
+                    "default": null
+                },
+                {
+                    "key": "quantity",
+                    "type": "double",
+                    "status": "available",
+                    "error": "",
+                    "required": false,
+                    "array": false,
+                    "min": 0,
+                    "max": null,
+                    "default": 0
+                },
+                {
+                    "key": "price",
+                    "type": "double",
+                    "status": "available",
+                    "error": "",
+                    "required": false,
+                    "array": false,
+                    "min": 0,
+                    "max": null,
+                    "default": 0
+                },
+                {
+                    "key": "total",
+                    "type": "double",
+                    "status": "available",
+                    "error": "",
+                    "required": false,
+                    "array": false,
+                    "min": 0,
+                    "max": null,
+                    "default": 0
+                }
+            ],
+            "indexes": []
+        }
+    ],
     "buckets": [
         {
             "$id": "logos",
