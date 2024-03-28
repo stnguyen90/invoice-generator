@@ -16,14 +16,21 @@ import { Route as rootRoute } from './routes/__root'
 
 // Create Virtual Routes
 
+const InvoicesLazyImport = createFileRoute('/invoices')()
 const LayoutLazyImport = createFileRoute('/_layout')()
 const LayoutIndexLazyImport = createFileRoute('/_layout/')()
+const InvoicesNewLazyImport = createFileRoute('/invoices/new')()
 const AuthSignInLazyImport = createFileRoute('/auth/sign-in')()
 const LayoutSettingsLazyImport = createFileRoute('/_layout/settings')()
 const LayoutProductsLazyImport = createFileRoute('/_layout/products')()
 const LayoutClientsLazyImport = createFileRoute('/_layout/clients')()
 
 // Create/Update Routes
+
+const InvoicesLazyRoute = InvoicesLazyImport.update({
+  path: '/invoices',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/invoices.lazy').then((d) => d.Route))
 
 const LayoutLazyRoute = LayoutLazyImport.update({
   id: '/_layout',
@@ -34,6 +41,11 @@ const LayoutIndexLazyRoute = LayoutIndexLazyImport.update({
   path: '/',
   getParentRoute: () => LayoutLazyRoute,
 } as any).lazy(() => import('./routes/_layout.index.lazy').then((d) => d.Route))
+
+const InvoicesNewLazyRoute = InvoicesNewLazyImport.update({
+  path: '/new',
+  getParentRoute: () => InvoicesLazyRoute,
+} as any).lazy(() => import('./routes/invoices/new.lazy').then((d) => d.Route))
 
 const AuthSignInLazyRoute = AuthSignInLazyImport.update({
   path: '/auth/sign-in',
@@ -69,6 +81,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutLazyImport
       parentRoute: typeof rootRoute
     }
+    '/invoices': {
+      preLoaderRoute: typeof InvoicesLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/_layout/clients': {
       preLoaderRoute: typeof LayoutClientsLazyImport
       parentRoute: typeof LayoutLazyImport
@@ -84,6 +100,10 @@ declare module '@tanstack/react-router' {
     '/auth/sign-in': {
       preLoaderRoute: typeof AuthSignInLazyImport
       parentRoute: typeof rootRoute
+    }
+    '/invoices/new': {
+      preLoaderRoute: typeof InvoicesNewLazyImport
+      parentRoute: typeof InvoicesLazyImport
     }
     '/_layout/': {
       preLoaderRoute: typeof LayoutIndexLazyImport
@@ -101,6 +121,7 @@ export const routeTree = rootRoute.addChildren([
     LayoutSettingsLazyRoute,
     LayoutIndexLazyRoute,
   ]),
+  InvoicesLazyRoute.addChildren([InvoicesNewLazyRoute]),
   AuthSignInLazyRoute,
 ])
 
