@@ -1,5 +1,4 @@
 import {
-  Link,
 	Outlet,
 	createRootRouteWithContext,
 	redirect,
@@ -17,8 +16,8 @@ export const Route = createRootRouteWithContext<RouteContext>()({
 
 		const { user } = context;
 		if (!user) {
-      console.log("User isn't logged in")
-  		if (location.pathname.startsWith("/auth")) return;
+			console.log("User isn't logged in");
+			if (location.pathname.startsWith("/auth")) return;
 			console.log("Redirecting to /auth/sign-in");
 			throw redirect({
 				to: "/auth/sign-in",
@@ -30,19 +29,10 @@ export const Route = createRootRouteWithContext<RouteContext>()({
 				},
 			});
 		}
-    console.log("User is logged in")
+		console.log("User is logged in");
 	},
 	component: () => (
 		<>
-			{/* <div className="p-2 flex gap-2">
-        <Link to="/" className="[&.active]:font-bold">
-          Home
-        </Link>{' '}
-        <Link to="/about" className="[&.active]:font-bold">
-          About
-        </Link>
-      </div>
-      <hr /> */}
 			<Outlet />
 			<TanStackRouterDevtools />
 		</>

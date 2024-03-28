@@ -30,7 +30,7 @@ function SignIn() {
 
 			const to = search.redirect || "/";
 			console.log(`Navigating to ${to}`);
-			navigate({ to, replace: true});
+			navigate({ to, replace: true });
 		},
 	});
 

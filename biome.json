@@ -10,6 +10,6 @@
 		}
 	},
 	"files": {
-		"ignore": ["appwrite.template.json"]
+		"ignore": ["appwrite.template.json", "src/routeTree.gen.ts"]
 	}
 }
