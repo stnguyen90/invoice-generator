@@ -1,10 +1,10 @@
+import { databases } from "@/appwrite";
 import { type Invoice, columns } from "@/components/invoices/columns";
 import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/ui/data-table";
 import { useQuery } from "@tanstack/react-query";
 import { Link, createLazyFileRoute } from "@tanstack/react-router";
 import { Search } from "lucide-react";
-import { databases } from "@/appwrite";
 
 async function getData(): Promise<Invoice[]> {
   const invoices = await databases.listDocuments("default", "invoices");
